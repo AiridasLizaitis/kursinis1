@@ -39,7 +39,10 @@ class TicTacToe:
 
     def StartGame(self):
         print("Tic-Tac-Toe Game")
-        print("Player 1 [X] --- Player 2 [O]\n")
+        with open("players.txt", "r") as file:
+            player1_name = file.readline().strip()
+            player2_name = file.readline().strip()
+        print(f"{player1_name} [X] --- {player2_name} [O]\n")
         print("Please Wait...")
         time.sleep(3)
 
@@ -48,10 +51,10 @@ class TicTacToe:
             self.DrawBoard()
 
             if self.player % 2 != 0:
-                print("Player 1's chance")
+                print(f"{player1_name}'s chance")
                 self.Mark = 'X'
             else:
-                print("Player 2's chance")
+                print(f"{player2_name}'s chance")
                 self.Mark = 'O'
 
             while True:
@@ -80,9 +83,9 @@ class TicTacToe:
             elif self.Game == self.Win:
                 self.player -= 1
                 if self.player % 2 != 0:
-                    print("Player 1 Won")
+                    print(f"{player1_name} Won")
                 else:
-                    print("Player 2 Won")
+                    print(f"{player2_name} Won")
 
 class TicTacToeWithLogging:
     def __init__(self, tic_tac_toe):
@@ -96,4 +99,4 @@ class TicTacToeWithLogging:
 if __name__ == "__main__":
     game = TicTacToe()
     game_with_logging = TicTacToeWithLogging(game)
-    game_with_logging.StartGame() #dadsdas
+    game_with_logging.StartGame()
