@@ -23,19 +23,12 @@ class TicTacToe:
         return self.board[x] == ' '
  
     def CheckWin(self):
-        if self.board[1] == self.board[2] == self.board[3] != ' ' or \
-           self.board[4] == self.board[5] == self.board[6] != ' ' or \
-           self.board[7] == self.board[8] == self.board[9] != ' ' or \
-           self.board[1] == self.board[4] == self.board[7] != ' ' or \
-           self.board[2] == self.board[5] == self.board[8] != ' ' or \
-           self.board[3] == self.board[6] == self.board[9] != ' ' or \
-           self.board[1] == self.board[5] == self.board[9] != ' ' or \
-           self.board[3] == self.board[5] == self.board[7] != ' ':
-            return self.Win
-        elif all(cell != ' ' for cell in self.board[1:]):
+        for line in [(1, 2, 3), (4, 5, 6), (7, 8, 9), (1, 4, 7), (2, 5, 8), (3, 6, 9), (1, 5, 9), (3, 5, 7)]:
+            if self.board[line[0]] == self.board[line[1]] == self.board[line[2]] != ' ':
+                return self.Win
+        if all(cell != ' ' for cell in self.board[1:]):
             return self.Draw
-        else:
-            return self.Running
+        return self.Running
  
     def LogWinner(self, winner_name):
         today = datetime.date.today().strftime("%Y-%m-%d")
